@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* ===== Custom Fonts ===== */
+
+@font-face {
+  font-family: "Purista";
+  src: url("/fonts/Purista.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CeraPro";
+  src: url("/fonts/CeraPro.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+* {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;     
+}
+
+*::-webkit-scrollbar {
+  display: none;             
+}
+
+
+/* ===== Base Styling ===== */
+
+body {
+  font-family: "CeraPro", sans-serif;
+  background: #25b6d9;
+  color: white;
+}
