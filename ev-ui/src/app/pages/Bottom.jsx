@@ -4,22 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 
-// Utility: Wraps specific symbols (&, %, -) in a span with a special font
-const SYMBOLS_FONT_CLASS = "font-mono"; // Use monospaced font as different font, or define your own
-
-function stylizeSymbols(text) {
-  // You can extend this RegExp to add additional symbols if you wish
-  return text.split("").map((char, idx) => {
-    if (["&", "%", "-", "+", "@"].includes(char)) {
-      return (
-        <span key={idx} className={SYMBOLS_FONT_CLASS}>
-          {char}
-        </span>
-      );
-    }
-    return char;
-  });
-}
+import { stylizeSymbols } from "../../lib/stylizeSymbols";
 
 export default function Bottom() {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -41,7 +26,7 @@ export default function Bottom() {
       id: 3,
       brand: "CHHOTA BULL",
       img: "/bull1.jpeg",
-      bgColor: "bg-gradient-to-r from-[#0F5C66] to-teal-600",
+      bgColor: "bg-gradient-to-r from-[#00586D] to-teal-600",
     },
   ];
 
@@ -84,15 +69,14 @@ export default function Bottom() {
       {/* --- SECTION 1: HERO --- */}
       <section className="w-full pt-10 pb-10 md:pb-12 bg-white rounded-[30px] sm:rounded-[50px] overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
-          <div className="relative w-full max-w-[1100px] mb-12 sm:mb-20 rounded-[30px] sm:rounded-[50px] overflow-hidden">
-            <div className="relative z-15 flex justify-center">
+          <div className="relative w-full max-w-[1100px] mb-12 sm:mb-10 rounded-[30px] sm:rounded-[50px] overflow-hidden h-[260px] md:h-[620px]">
+            <div className="relative z-15 w-full h-full">
               <Image
                 src="/main1.png"
                 alt="EV Lineup"
-                width={1300}
-                height={700}
+                fill
                 priority
-                className="w-full h-auto object-contain"
+                className="object-cover"
               />
             </div>
           </div>
@@ -100,13 +84,15 @@ export default function Bottom() {
             {/* Heading: Added font-purista */}
             <h2 className="font-purista text-[25px] sm:text-6xl md:text-[85px] font-[1000] text-[#1a2e2e] leading-[1] sm:leading-[0.9] tracking-tighter uppercase">
               {/* Stylize the symbol ampersand (&) */}
-              {stylizeSymbols("Electric Vehicles Built for Performance & Reliability")}
+              {stylizeSymbols(
+                "Electric Vehicles Built for Performance & Reliability",
+              )}
             </h2>
             {/* Subtext: Added font-cerapro */}
             <p className="font-cerapro text-gray-500 mt-6 sm:mt-10 text-sm sm:text-xl md:text-2xl font-medium max-w-2xl mx-auto opacity-75">
               {/* No symbol in this text but keep for generality */}
               {stylizeSymbols(
-                "Our electric vehicles offer smooth driving, robust build quality, and dependable range."
+                "Our electric vehicles offer smooth driving, robust build quality, and dependable range.",
               )}
             </p>
           </div>
@@ -114,9 +100,9 @@ export default function Bottom() {
       </section>
 
       {/* --- SECTION 2: SLIDER --- */}
-      <section className="w-full px-4 pb-10 bg-white flex justify-center">
+      <section className="w-[95%] mx-auto pb-10 bg-white flex justify-center">
         <div className="w-full max-w-[1200px] flex flex-col items-center">
-          <div className="relative w-full max-w-[1200px] h-[240px] sm:h-[360px] md:h-[480px] lg:h-[560px] mx-auto rounded-[25px] sm:rounded-[50px] overflow-hidden bg-gray-100 shadow-md">
+          <div className="relative w-full max-w-[1200px] h-[300px] md:h-[700px] mx-auto rounded-[25px] sm:rounded-[50px] overflow-hidden bg-gray-100 shadow-md">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeSlide}
@@ -131,7 +117,7 @@ export default function Bottom() {
                   alt={sliderData[activeSlide].brand}
                   fill
                   priority
-                  className="object-contain p-4 sm:p-6"
+                  className="object-cover"
                 />
               </motion.div>
             </AnimatePresence>
@@ -151,7 +137,6 @@ export default function Bottom() {
       {/* --- SECTION 3: FEATURES --- */}
       <section className="w-full py-24 px-4 bg-[#f3f3f3] overflow-hidden">
         <div className="max-w-5xl mx-auto">
-
           {/* Heading Animation */}
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -166,7 +151,9 @@ export default function Bottom() {
             </h2>
 
             <p className="font-cerapro text-gray-500 mt-6 sm:mt-7 text-sm sm:text-xl md:text-2xl font-medium max-w-3xl mx-auto opacity-75">
-              {stylizeSymbols("Tap into a fast-growing market with a future-ready mobility business")}
+              {stylizeSymbols(
+                "Tap into a fast-growing market with a future-ready mobility business",
+              )}
             </p>
           </motion.div>
 
@@ -191,16 +178,18 @@ export default function Bottom() {
                   <div className="relative w-full max-w-[600px]">
                     <div
                       className={`flex items-center gap-6 px-12 py-6 w-full 
-                border-[#0F5C66] rounded-full bg-white shadow-sm 
-                ${isRight 
-                        ? "flex-row-reverse text-right border-r-[9px]" 
-                        : "border-l-[9px]"}`}
+                border-[#00586D] rounded-full bg-white shadow-sm 
+                ${
+                  isRight
+                    ? "flex-row-reverse text-right border-r-[9px]"
+                    : "border-l-[9px]"
+                }`}
                     >
                       <motion.div
                         initial={{ scale: 0 }}
                         whileInView={{ scale: 1 }}
                         transition={{ duration: 0.4, delay: index * 0.2 }}
-                        className="w-16 h-16 rounded-full bg-[#0F5C66] flex items-center justify-center text-white text-2xl shadow-md shrink-0"
+                        className="w-16 h-16 rounded-full bg-[#00586D] flex items-center justify-center text-white text-2xl shadow-md shrink-0"
                       >
                         <Icon icon={f.icon} width="26" height="26" />
                       </motion.div>
