@@ -13,6 +13,7 @@ export default function Form() {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,8 +44,11 @@ export default function Form() {
       setLastName("");
       setEmail("");
       setPhone("");
-      setStatus("Saved ✅");
+      setShowThankYou(true);
       setIsSaving(false);
+      if (typeof window !== "undefined" && window.fbq) {
+        window.fbq("track", "Lead");
+      }
     } catch (err) {
       // Log structured error information to help debugging (network / permission / extension)
       console.error("Error saving lead:", {
@@ -62,6 +66,14 @@ export default function Form() {
   return (
     <section className="w-full md:min-h-screen min-h-auto py-10 sm:py-12 bg-gradient-to-b from-[#00586D] to-white flex justify-center md:items-center items-start px-8">
       <div className="w-full max-w-[480px] h-auto bg-white rounded-[40px] sm:rounded-[50px] p-6 sm:p-10 shadow-[0_15px_40px_rgba(0,0,0,0.08)]">
+        {showThankYou ? (
+          <div className="text-center py-6">
+            <h2 className="font-purista text-2xl sm:text-3xl font-bold text-[#00586D] mb-3">Thank you</h2>
+            <p className="font-cerapro text-gray-600 text-base sm:text-lg">
+              We’ve received your details and will get back to you soon.
+            </p>
+          </div>
+        ) : (
         <form className="space-y-5 sm:space-y-6" onSubmit={handleSubmit} noValidate>
           <div className="relative">
             <label htmlFor="firstName" className="block font-purista text-gray-800 text-sm sm:text-base font-semibold mb-2">
@@ -146,7 +158,8 @@ export default function Form() {
             </button>
           </div>
         </form>
-        {status && <p className="mt-4 text-sm text-gray-700">{stylizeSymbols(status)}</p>}
+        )}
+        {status && !showThankYou && <p className="mt-4 text-sm text-gray-700">{stylizeSymbols(status)}</p>}
       </div>
     </section>
   );
