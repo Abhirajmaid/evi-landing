@@ -18,6 +18,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <Head />
+      </head>
+      <body className={`${purista.variable} ${ceraPro.variable} font-cerapro antialiased`}>
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
           !function(f,b,e,v,n,t,s)
@@ -36,8 +38,6 @@ export default function RootLayout({ children }) {
           fbq('track', 'PageView');
           `}
         </Script>
-      </head>
-      <body className={`${purista.variable} ${ceraPro.variable} font-cerapro antialiased`}>
         {children}
         <noscript>
           <img
