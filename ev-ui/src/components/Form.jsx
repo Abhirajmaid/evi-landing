@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { stylizeSymbols } from "../../lib/stylizeSymbols";
-import { db } from "../../firebase";
+import { stylizeSymbols } from "../lib/stylizeSymbols";
+import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function Form() {
@@ -74,7 +74,7 @@ export default function Form() {
           <div className="text-center py-6">
             <h2 className="font-purista text-2xl sm:text-3xl font-bold text-[#00586D] mb-3">Thank you</h2>
             <p className="font-cerapro text-gray-600 text-base sm:text-lg">
-              We’ve received your details and will get back to you soon.
+              We've received your details and will get back to you soon.
             </p>
           </div>
         ) : (

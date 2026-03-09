@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../components/Logo";
-import { stylizeSymbols } from "../../lib/stylizeSymbols";
+import { stylizeSymbols } from "../lib/stylizeSymbols";
 import { Icon } from "@iconify/react";
 
 export default function Footer() {

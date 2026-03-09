@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 
-import { stylizeSymbols } from "../../lib/stylizeSymbols";
+import { stylizeSymbols } from "../lib/stylizeSymbols";
 
 export default function Bottom() {
   const [activeSlide, setActiveSlide] = useState(0);
