@@ -15,6 +15,12 @@ export default function Form() {
   const [isSaving, setIsSaving] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
 
+  const trackLead = () => {
+    if (typeof window !== "undefined" && typeof window.fbq === "function") {
+      window.fbq("track", "Lead");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Basic client-side validation to improve UX
@@ -46,9 +52,7 @@ export default function Form() {
       setPhone("");
       setShowThankYou(true);
       setIsSaving(false);
-      if (typeof window !== "undefined" && window.fbq) {
-        window.fbq("track", "Lead");
-      }
+      trackLead();
     } catch (err) {
       // Log structured error information to help debugging (network / permission / extension)
       console.error("Error saving lead:", {
